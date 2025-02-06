@@ -1,20 +1,27 @@
 import React from 'react';
 import {
-  LineChart,
   BarChart,
   PieChart as RechartsPieChart,
-  Line,
-  Bar,
-  Cell,
-  Pie,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend
+  Legend,
+  Bar,
+  Cell,
+  Pie
 } from 'recharts';
 
+const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF'];
+
 // Sample Data
+const budgetData = [
+  { category: 'Storage', cost: 600 },
+  { category: 'Compute', cost: 900 },
+  { category: 'Networking', cost: 300 },
+  { category: 'Databases', cost: 200 }
+];
+
 const costData = [
   { month: 'Jan', amount: 1200 },
   { month: 'Feb', amount: 1500 },
@@ -25,63 +32,59 @@ const costData = [
 ];
 
 const resourceData = [
-  { service: 'Storage', usage: 45 },
-  { service: 'Compute', usage: 30 },
+  { service: 'Storage', usage: 30 },
+  { service: 'Compute', usage: 45 },
   { service: 'Networking', usage: 15 },
   { service: 'Databases', usage: 10 }
 ];
 
-const budgetData = [
-  { category: 'Storage', actual: 600, budget: 700 },
-  { category: 'Compute', actual: 900, budget: 1200 },
-  { category: 'Networking', actual: 300, budget: 400 },
-  { category: 'Databases', actual: 200, budget: 300 }
-];
+function Graph({ title, type }) {
 
-export default function Graph({ title, type }) {
-  if (type === 'cost') {
-    return (
-      <LineChart width={400} height={300} data={costData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="month" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line type="monotone" dataKey="amount" stroke="#8884d8" name="Monthly Cost" />
-      </LineChart>
-    );
-  } else if (type === 'resource') {
-    return (
-      <RechartsPieChart width={400} height={300} data={resourceData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <Tooltip />
-        <Legend />
-        {resourceData.map((entry, index) => (
-          <Cell
-            key={`cell-${index}`}
-            cy={200}
-            fill={[
-              '#8884d8',
-              '#82ca9d',
-              '#ffc658',
-              '#ff7300'
-            ][index % 4]}
+  return (
+    <div>
+      <h3 className='text-center'>{title}</h3>
+      {type === 'monthlySpend' && (
+        <BarChart width={450} height={275} data={costData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="amount" fill="#8884d8" barSize={20} name="Amount ($)" />
+        </BarChart>
+      )}
+      {type === 'topServices' && (
+        <BarChart width={450} height={275} data={resourceData} layout="vertical">
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis type="number" domain={[0, 50]} />
+          <YAxis dataKey="service" type="category" />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="usage" fill="#82ca9d" barSize={30} name="Usage (%)" />
+        </BarChart>
+      )}
+      {type === 'costBySubscription' && (
+        <RechartsPieChart width={450} height={275} data={budgetData}>
+          <Tooltip />
+          <Legend />
+          {budgetData.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+          <Pie
+            dataKey="cost"
+            nameKey="category"
+            cx="50%"
+            cy="50%"
+            labelLine={true}
+            label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+            outerRadius={80}
+            fill="#8884d8"
+            data={budgetData}
           />
-        ))}
-        <Pie dataKey="usage" nameKey="service" cx={200} cy={200} innerRadius={60} outerRadius={120} />
-      </RechartsPieChart>
-    );
-  } else if (type === 'budget') {
-    return (
-      <BarChart width={400} height={300} data={budgetData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="category" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="actual" fill="#8884d8" name="Actual Spend" />
-        <Bar dataKey="budget" fill="#82ca9d" name="Budget" />
-      </BarChart>
-    );
-  }
+        </RechartsPieChart>
+      )}
+    </div>
+  );
 }
+
+export default Graph;

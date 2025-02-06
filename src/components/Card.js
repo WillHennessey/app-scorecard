@@ -3,49 +3,41 @@ import Graph from "./Graph";
 
 function Card({
   title,
-  status,
   lastUpdated,
   icon,
   color = "#8884d8",
   graphs = [] // Default empty array if not provided
 }) {
   return (
-    <div style={{ backgroundColor: '#f5f5f5', padding: '20px', borderRadius: '10px' }}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+    <div className="bg-f5f5f5 p-6 rounded-lg shadow">
+      <div className="flex items-center">
         {icon}
-        <h2 style={{ margin: 0, color }}> {/* Fixed margin and added color */}
-          {title}
-        </h2>
+        <h3 className={`text-xl font-bold ml-4 ${color}`}>{title}</h3>
       </div>
-      <div style={{ marginTop: '15px' }}>
-        <p>Status: {status}</p>
+      {graphs.length > 0 && (
+        <div className="mt-6 grid grid-cols-1 xl:grid-cols-3 gap-2">
+          {graphs.map((graph) => {
+            let type = '';
+            if (graph.startsWith('Cost')) {
+              type = 'monthlySpend';
+            } else if (graph.startsWith('Top')) {
+              type = 'topServices';
+            } else if (graph.startsWith('Monthly')) {
+              type = 'costBySubscription';
+            }
+            return (
+              <div key={graph} className="bg-white p-4 rounded-lg shadow">
+                <Graph
+                  title={graph}
+                  type={type}
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
+      <div className="mt-4 space-y-2 float-right">
         <p>Last Updated: {lastUpdated}</p>
-      </div>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: '20px',
-        marginTop: '20px'
-      }}>
-        {/* Safely map over graphs if it's an array */}
-        {Array.isArray(graphs) && graphs.map((graph) => {
-          let type = '';
-          if (graph.startsWith('Cost')) {
-            type = 'cost';
-          } else if (graph.startsWith('Top 5')) {
-            type = 'resource';
-          } else if (graph.startsWith('Monthly')) {
-            type = 'budget';
-          }
-          return (
-            <Graph
-              key={graph}
-              title={graph}
-              type={type}
-              style={{ backgroundColor: color }}
-            />
-          );
-        })}
       </div>
     </div>
   );
