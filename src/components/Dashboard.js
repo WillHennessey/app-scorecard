@@ -1,46 +1,46 @@
 import React from "react";
 import Card from "./Card";
-import { FiShield, FiMonitor, FiLock, FiCode} from "react-icons/fi";
-import {FaMicrosoft} from 'react-icons/fa'
+import { FiShield, FiMonitor, FiLock, FiCode } from "react-icons/fi";
+import { FaMicrosoft } from "react-icons/fa";
 const services = [
   {
     title: "Azure Cost Management",
     lastUpdated: "Last updated 2h ago",
     icon: <FaMicrosoft />,
     color: "text-blue-500",
-    graphs: ["Cost by Subscription", "Top 5 Services", "Monthly Spend"]
+    graphs: ["Cost by Subscription", "Top 5 Services", "Monthly Spend"],
   },
   {
     title: "Azure Defender",
     lastUpdated: "Today at 10:30 AM",
     icon: <FiShield />,
-    color: "text-blue-500"
+    color: "text-blue-500",
   },
   {
     title: "Azure Advisor",
     lastUpdated: "Today at 10:30 AM",
     icon: <FiMonitor />,
-    color: "text-blue-500"
+    color: "text-blue-500",
   },
   {
     title: "SonarQube",
     status: "Active",
     lastUpdated: "Today at 10:30 AM",
     icon: <FiCode />,
-    color: "text-blue-500"
+    color: "text-blue-500",
   },
   {
     title: "Rapid7",
     lastUpdated: "Today at 10:30 AM",
     icon: <FiLock />,
-    color: "text-blue-500"
+    color: "text-blue-500",
   },
   {
     title: "Contrast Security",
     lastUpdated: "Today at 10:30 AM",
     icon: <FiShield />,
-    color: "text-blue-500"
-  }
+    color: "text-blue-500",
+  },
 ];
 
 function Dashboard() {
@@ -57,7 +57,7 @@ function Dashboard() {
               lastUpdated={service.lastUpdated}
               icon={service.icon}
               color={service.color}
-              graphs={service.graphs}  // Pass the graph data to the Card component if needed
+              graphs={service.graphs} // Pass the graph data to the Card component if needed
             />
           ))}
         </div>
