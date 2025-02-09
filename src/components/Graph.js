@@ -49,7 +49,7 @@ function Graph({ title, type }) {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="amount" fill="#8884d8" barSize={20} name="Amount ($)" />
+          <Bar dataKey="amount" fill="#0088FE" barSize={20} name="Amount ($)" />
         </BarChart>
       )}
       {type === "topServices" && (
@@ -64,16 +64,13 @@ function Graph({ title, type }) {
           <YAxis dataKey="service" type="category" />
           <Tooltip />
           <Legend />
-          <Bar dataKey="usage" fill="#82ca9d" barSize={30} name="Usage (%)" />
+          <Bar dataKey="usage" fill="#00C49F" barSize={30} name="Usage (%)" />
         </BarChart>
       )}
       {type === "costBySubscription" && (
         <RechartsPieChart width={450} height={275} data={budgetData}>
           <Tooltip />
           <Legend />
-          {budgetData.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
           <Pie
             dataKey="cost"
             nameKey="category"
@@ -84,9 +81,15 @@ function Graph({ title, type }) {
               `${name}: ${(percent * 100).toFixed(0)}%`
             }
             outerRadius={80}
-            fill="#8884d8"
             data={budgetData}
-          />
+          >
+            {budgetData.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
         </RechartsPieChart>
       )}
     </div>

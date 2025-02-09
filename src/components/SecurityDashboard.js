@@ -1,32 +1,12 @@
 import React from "react";
+import { FiLock, FiShield } from "react-icons/fi";
 import Card from "./Card";
-import { FiShield, FiMonitor, FiLock, FiCode } from "react-icons/fi";
-import { FaMicrosoft } from "react-icons/fa";
+
 const services = [
   {
-    title: "Azure Cost Management",
-    lastUpdated: "Last updated 2h ago",
-    icon: <FaMicrosoft />,
-    color: "text-blue-500",
-    graphs: ["Cost by Subscription", "Top 5 Services", "Monthly Spend"],
-  },
-  {
-    title: "Azure Defender",
+    title: "Contrast Security",
     lastUpdated: "Today at 10:30 AM",
     icon: <FiShield />,
-    color: "text-blue-500",
-  },
-  {
-    title: "Azure Advisor",
-    lastUpdated: "Today at 10:30 AM",
-    icon: <FiMonitor />,
-    color: "text-blue-500",
-  },
-  {
-    title: "SonarQube",
-    status: "Active",
-    lastUpdated: "Today at 10:30 AM",
-    icon: <FiCode />,
     color: "text-blue-500",
   },
   {
@@ -36,19 +16,19 @@ const services = [
     color: "text-blue-500",
   },
   {
-    title: "Contrast Security",
+    title: "Azure Defender",
     lastUpdated: "Today at 10:30 AM",
     icon: <FiShield />,
     color: "text-blue-500",
   },
 ];
 
-function Dashboard() {
+function SecurityDashboard() {
   return (
-    <div data-testId="dashboard" className="space-y-6">
+    <div data-testId="security-dashboard" className="space-y-6">
       {/* Summary Section */}
       <div className="bg-white rounded-lg shadow p-6 space-y-4">
-        <h3 className="text-xl font-bold">Summary</h3>
+        <h2 className="text-2xl font-bold mb-6">Security Dashboard</h2>
         <div className="grid grid-cols-1 gap-4">
           {services.map((service, index) => (
             <Card
@@ -66,4 +46,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default SecurityDashboard;

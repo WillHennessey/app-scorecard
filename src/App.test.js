@@ -35,4 +35,43 @@ describe("<App />", () => {
     const headingElement = screen.getByText("Services Overview");
     expect(headingElement).toBeInTheDocument();
   });
+  // Check if main content area has the correct className
+  test("main content has correct className", () => {
+    render(<App />);
+    const mainContent = screen.getByRole("main");
+    expect(mainContent).toHaveClass("pt-16 px-6 pb-8 flex");
+  });
+
+  // Check if Sidebar is rendered
+  test("renders Sidebar", () => {
+    render(<App />);
+    const sidebarElement = screen.getByTestId("sidebar");
+    expect(sidebarElement).toBeInTheDocument();
+  });
+
+  // Check if Dashboard component is rendered
+  test("renders Dashboard", () => {
+    render(<App />);
+    const dashboardElement = screen.getByTestId("dashboard");
+    expect(dashboardElement).toBeInTheDocument();
+  });
+
+  test("renders Security button and navigates to Security Dashboard", () => {
+    const { getByText } = render(
+      <Router>
+        <App />
+      </Router>
+    );
+
+    fireEvent.click(getByText("Security"));
+    const dashboardElement = screen.getByTestId("security-dashboard");
+    expect(dashboardElement).toBeInTheDocument();
+  });
+
+  // Check if Header component is rendered
+  test("renders Header", () => {
+    render(<App />);
+    const headerElement = screen.getByTestId("header");
+    expect(headerElement).toBeInTheDocument();
+  });
 });
