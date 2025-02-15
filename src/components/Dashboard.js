@@ -8,13 +8,21 @@ const services = [
     lastUpdated: "Last updated 2h ago",
     icon: <FaMicrosoft />,
     color: "text-blue-500",
-    graphs: ["Cost by Subscription", "Top 5 Services", "Monthly Spend"],
+    graphs: ["Monthly Spend", "Top 5 Services", "Cost by Subscription"],
   },
   {
     title: "Azure Defender",
     lastUpdated: "Today at 10:30 AM",
     icon: <FiShield />,
     color: "text-blue-500",
+    graphs: [
+      "Security Alerts by Resource Type",
+      "Top 5 Security Alerts",
+      "Security Alerts by Subscription",
+      "Top 5 Azure Policy Violations",
+      "Top 5 Regulatory Compliance Alerts",
+      "Regulatory Compliance by Subscription",
+    ],
   },
   {
     title: "Azure Advisor",
@@ -45,7 +53,7 @@ const services = [
 
 function Dashboard() {
   return (
-    <div data-testId="dashboard" className="space-y-6">
+    <div title="dashboard" className="space-y-6">
       {/* Summary Section */}
       <div className="bg-white rounded-lg shadow p-6 space-y-4">
         <h3 className="text-xl font-bold">Summary</h3>
@@ -57,7 +65,7 @@ function Dashboard() {
               lastUpdated={service.lastUpdated}
               icon={service.icon}
               color={service.color}
-              graphs={service.graphs} // Pass the graph data to the Card component if needed
+              graphs={service.graphs}
             />
           ))}
         </div>

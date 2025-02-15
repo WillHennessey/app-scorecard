@@ -15,22 +15,12 @@ function Card({
         <h3 className={`text-xl font-bold ml-4 ${color}`}>{title}</h3>
       </div>
       {graphs.length > 0 && (
-        <div className="mt-6 grid grid-cols-1 xl:grid-cols-3 gap-2">
-          {graphs.map((graph) => {
-            let type = "";
-            if (graph.startsWith("Cost")) {
-              type = "monthlySpend";
-            } else if (graph.startsWith("Top")) {
-              type = "topServices";
-            } else if (graph.startsWith("Monthly")) {
-              type = "costBySubscription";
-            }
-            return (
-              <div key={graph} className="bg-white p-4 rounded-lg shadow">
-                <Graph title={graph} type={type} />
-              </div>
-            );
-          })}
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3">
+          {graphs.map((graph) => (
+            <div key={graph} className="bg-white rounded-lg shadow">
+              <Graph title={graph} />
+            </div>
+          ))}
         </div>
       )}
       <div className="mt-4 space-y-2 float-right">

@@ -4,6 +4,7 @@ import Dashboard from "./components/Dashboard";
 import SecurityDashboard from "./components/SecurityDashboard"; // Import the new component
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
+import "./App.css";
 
 function App() {
   return (
