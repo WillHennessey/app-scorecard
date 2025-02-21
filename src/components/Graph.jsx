@@ -1,7 +1,7 @@
 import React from "react";
 import {
   BarChart,
-  PieChart as RechartsPieChart,
+  PieChart,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -10,15 +10,16 @@ import {
   Bar,
   Cell,
   Pie,
+  ResponsiveContainer,
 } from "recharts";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#AF19FF"];
 
 const budgetData = [
-  { category: "Storage", cost: 500 },
-  { category: "Compute", cost: 600 },
-  { category: "Networking", cost: 300 },
-  { category: "Databases", cost: 200 },
+  { name: "Storage", value: 500 },
+  { name: "Compute", value: 600 },
+  { name: "Networking", value: 300 },
+  { name: "Databases", value: 200 },
 ];
 
 const costData = [
@@ -54,10 +55,10 @@ const top5SecurityAlertsData = [
 ];
 
 const securityAlertsBySubscriptionData = [
-  { subscription: "Sub 1", count: 300 },
-  { subscription: "Sub 2", count: 200 },
-  { subscription: "Sub 3", count: 100 },
-  { subscription: "Sub 4", count: 200 },
+  { subscription: "Sub 1", count: 30 },
+  { subscription: "Sub 2", count: 20 },
+  { subscription: "Sub 3", count: 10 },
+  { subscription: "Sub 4", count: 20 },
   { subscription: "Sub 5", count: 100 },
 ];
 
@@ -70,20 +71,47 @@ const top5PolicyViolationsData = [
 ];
 
 const top5RegulatoryComplianceAlertsData = [
-  { alert: "Compliance Alert 1", count: 4 },
-  { alert: "Compliance Alert 2", count: 3 },
-  { alert: "Compliance Alert 3", count: 5 },
-  { alert: "Compliance Alert 4", count: 2 },
-  { alert: "Compliance Alert 5", count: 7 },
+  { alert: "Alert 1", count: 4 },
+  { alert: "Alert 2", count: 3 },
+  { alert: "Alert 3", count: 5 },
+  { alert: "Alert 4", count: 2 },
+  { alert: "Alert 5", count: 7 },
 ];
 
 const regulatoryComplianceBySubscriptionData = [
-  { subscription: "Sub 1", compliance: 200 },
-  { subscription: "Sub 2", compliance: 400 },
-  { subscription: "Sub 3", compliance: 300 },
-  { subscription: "Sub 4", compliance: 100 },
-  { subscription: "Sub 5", compliance: 500 },
+  { subscription: "Sub 1", compliance: 20 },
+  { subscription: "Sub 2", compliance: 40 },
+  { subscription: "Sub 3", compliance: 30 },
+  { subscription: "Sub 4", compliance: 10 },
 ];
+
+const RADIAN = Math.PI / 180;
+
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index,
+}) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+    >
+      {`${(percent * 100).toFixed(0)}%`}
+    </text>
+  );
+};
 
 function Graph({ title }) {
   let graphData;
@@ -134,7 +162,7 @@ function Graph({ title }) {
     <div>
       <h3 className="text-center font-bold">{title}</h3>
       {graphType === "monthlySpend" && (
-        <BarChart width={450} height={275} data={graphData}>
+        <BarChart width={375} height={250} data={graphData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="month" />
           <YAxis />
@@ -144,7 +172,7 @@ function Graph({ title }) {
         </BarChart>
       )}
       {graphType === "topServices" && (
-        <BarChart width={450} height={275} data={graphData} layout="vertical">
+        <BarChart width={375} height={250} data={graphData} layout="vertical">
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis type="number" domain={[0, 50]} />
           <YAxis dataKey="service" type="category" />
@@ -154,31 +182,16 @@ function Graph({ title }) {
         </BarChart>
       )}
       {graphType === "costBySubscription" && (
-        <RechartsPieChart width={450} height={275} data={graphData}>
-          <Tooltip />
-          <Legend />
-          <Pie
-            dataKey="cost"
-            nameKey="category"
-            cx="50%"
-            cy="50%"
-            labelLine={true}
-            label={({ name, percent }) =>
-              `${name}: ${(percent * 100).toFixed(0)}%`
-            }
-            outerRadius={80}
-          >
-            {graphData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-        </RechartsPieChart>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart width={375} height={250}>
+            <Tooltip />
+            <Legend />
+            <Pie dataKey="value" data={graphData} fill="#8884d8" label />
+          </PieChart>
+        </ResponsiveContainer>
       )}
       {graphType === "bar" && (
-        <BarChart width={450} height={275} data={graphData}>
+        <BarChart width={375} height={250} data={graphData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="resourceType" />
           <YAxis />
@@ -188,7 +201,7 @@ function Graph({ title }) {
         </BarChart>
       )}
       {graphType === "horizontalBar" && (
-        <BarChart width={450} height={275} data={graphData} layout="vertical">
+        <BarChart width={375} height={250} data={graphData} layout="vertical">
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis type="number" />
           <YAxis
@@ -201,30 +214,13 @@ function Graph({ title }) {
         </BarChart>
       )}
       {graphType === "pie" && (
-        <RechartsPieChart width={450} height={275} data={graphData}>
-          <Tooltip />
-          <Legend />
-          <Pie
-            dataKey={
-              graphData[0]["count"] !== undefined ? "count" : "compliance"
-            }
-            nameKey="subscription" // Use "subscription" for labels
-            cx="50%"
-            cy="50%"
-            labelLine={true}
-            label={({ name, percent }) =>
-              `${name}: ${(percent * 100).toFixed(0)}%`
-            }
-            outerRadius={80}
-          >
-            {graphData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-        </RechartsPieChart>
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart width={375} height={250}>
+            <Tooltip />
+            <Legend />
+            <Pie dataKey="value" data={graphData} fill="#8884d8" label />
+          </PieChart>
+        </ResponsiveContainer>
       )}
     </div>
   );

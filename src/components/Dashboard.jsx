@@ -55,7 +55,7 @@ function Dashboard() {
   return (
     <div title="dashboard" className="space-y-6">
       {/* Summary Section */}
-      <div className="bg-white rounded-lg shadow p-6 space-y-4">
+      <div className="bg-white rounded-lg shadow p-4 space-y-4">
         <h3 className="text-xl font-bold">Summary</h3>
         <div className="grid grid-cols-1 gap-4">
           {services.map((service, index) => (

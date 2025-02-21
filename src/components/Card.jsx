@@ -9,7 +9,7 @@ function Card({
   graphs = [], // Default empty array if not provided
 }) {
   return (
-    <div className="bg-f5f5f5 p-6 rounded-lg shadow">
+    <div className="bg-f5f5f5 p-4 rounded-lg shadow">
       <div className="flex items-center">
         {icon}
         <h3 className={`text-xl font-bold ml-4 ${color}`}>{title}</h3>

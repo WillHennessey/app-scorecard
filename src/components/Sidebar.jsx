@@ -4,7 +4,10 @@ import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <aside className="w-42 fixed left-0 bg-white h-full shadow-md">
+    <aside
+      title="sidebar"
+      className="w-42 fixed left-0 bg-white h-full shadow-md"
+    >
       <div className="p-4 space-y-2">
         <h2 className="text-xl font-bold mb-4">Menu</h2>
         <NavLink
