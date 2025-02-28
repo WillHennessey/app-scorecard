@@ -3,11 +3,7 @@ import { FiSettings, FiMonitor, FiLock } from "react-icons/fi";
 import walgreensLogo from "../assets/Walgreens_initial_W_logo.png";
 import { NavLink } from "react-router-dom";
 
-function Header() {
-  const handleLogoClick = () => {
-    // Add your desired functionality here, e.g., navigate to a different page
-    console.log("Walgreens Logo Clicked");
-  };
+const Header = () => {
 
   return (
     <header title="header" className="bg-white shadow-sm fixed w-full z-10">
@@ -36,6 +32,6 @@ function Header() {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

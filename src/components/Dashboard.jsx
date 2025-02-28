@@ -1,7 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Card from "./Card";
 import { FiShield, FiMonitor, FiLock, FiCode } from "react-icons/fi";
 import { FaMicrosoft } from "react-icons/fa";
+
 const services = [
   {
     title: "Azure Cost Management",
@@ -51,7 +53,7 @@ const services = [
   },
 ];
 
-function Dashboard() {
+const Dashboard = () => {
   return (
     <div title="dashboard" className="space-y-6">
       {/* Summary Section */}
@@ -72,6 +74,18 @@ function Dashboard() {
       </div>
     </div>
   );
-}
+};
+
+Dashboard.propTypes = {
+  services: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      lastUpdated: PropTypes.string.isRequired,
+      icon: PropTypes.element.isRequired,
+      color: PropTypes.string.isRequired,
+      graphs: PropTypes.arrayOf(PropTypes.string),
+    })
+  ),
+};
 
 export default Dashboard;

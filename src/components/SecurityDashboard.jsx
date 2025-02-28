@@ -23,9 +23,9 @@ const services = [
   },
 ];
 
-function SecurityDashboard() {
+const SecurityDashboard = () => {
   return (
-    <div data-testId="security-dashboard" className="space-y-6">
+    <div data-testid="security-dashboard" className="space-y-6">
       {/* Summary Section */}
       <div className="bg-white rounded-lg shadow p-6 space-y-4">
         <h2 className="text-2xl font-bold mb-6">Security Dashboard</h2>
@@ -44,6 +44,6 @@ function SecurityDashboard() {
       </div>
     </div>
   );
-}
+};
 
 export default SecurityDashboard;
