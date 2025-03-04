@@ -21,10 +21,9 @@ function App() {
             <Route
               path="/"
               element={
-                <>
-                  <h2 className="text-2xl font-bold mb-6">Services Overview</h2>
+                <div className="flex flex-col space-y-6">
                   <Dashboard />
-                </>
+                </div>
               }
             />
             <Route path="/security" element={<SecurityDashboard />} />

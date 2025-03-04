@@ -14,9 +14,24 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#AF19FF"];
+const COLORS = [
+  "#0088FE",
+  "#00C49F",
+  "#FFBB28",
+  "#FF8042",
+  "#AA00FF",
+  "#FF4081",
+  "#00E5FF",
+  "#8884d8",
+  "#A3C1DA",
+  "#D5B2E0",
+  "#B7E4B5",
+  "#F8BBD0",
+  "#FFCCBC",
+];
 
 const RADIAN = Math.PI / 180;
+
 const renderCustomizedLabel = ({
   cx,
   cy,
@@ -29,6 +44,7 @@ const renderCustomizedLabel = ({
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
   return (
     <text
       x={x}
@@ -112,6 +128,25 @@ const regulatoryComplianceBySubscriptionData = [
   { name: "Sub 4", value: 10 },
 ];
 
+const vulnerabilitySLAData = [
+  { name: "Pharmacy", "0-30": 10, "30-90": 5, "90-180": 3, "180-220": 2 },
+  {
+    name: "Infrastructure",
+    "0-30": 7,
+    "30-90": 10,
+    "90-180": 5,
+    "180-220": 1,
+  },
+  { name: "Data", "0-30": 8, "30-90": 4, "90-180": 6, "180-220": 3 },
+];
+
+const vulnerabilitySLATrendData = [
+  { name: "Jan", "0-30": 5, "30-90": 2, "90-180": 1 },
+  { name: "Feb", "0-30": 6, "30-90": 3, "90-180": 0 },
+  { name: "Mar", "0-30": 7, "30-90": 1, "90-180": 2 },
+  { name: "Apr", "0-30": 8, "30-90": 4, "90-180": 1 },
+];
+
 class Graph extends PureComponent {
   renderCustomizedLabel = ({
     cx,
@@ -161,6 +196,10 @@ class Graph extends PureComponent {
         };
       case "Regulatory Compliance by Subscription":
         return { data: regulatoryComplianceBySubscriptionData, type: "pie" };
+      case "Vulnerability SLA (per Department)":
+        return { data: vulnerabilitySLAData, type: "stackedBar" };
+      case "Vulnerability SLA Trend":
+        return { data: vulnerabilitySLATrendData, type: "stackedBar" };
       default:
         return null;
     }
@@ -205,7 +244,7 @@ class Graph extends PureComponent {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="alerts" fill="#0088FE" />
+              <Bar dataKey="alerts" fill="#F8BBD0" />
             </BarChart>
           )}
           {type === "horizontalBar" && (
@@ -218,7 +257,20 @@ class Graph extends PureComponent {
               />
               <Tooltip />
               <Legend />
-              <Bar dataKey="count" fill="#82ca9d" />
+              <Bar dataKey="count" fill="#00C49F" />
+            </BarChart>
+          )}
+          {type === "stackedBar" && (
+            <BarChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="0-30" stackId="a" fill="#0088FE" />
+              <Bar dataKey="30-90" stackId="a" fill="#00C49F" />
+              <Bar dataKey="90-180" stackId="a" fill="#FFBB28" />
+              <Bar dataKey="180-220" stackId="a" fill="#FF8042" />
             </BarChart>
           )}
           {type === "pie" && (
@@ -231,9 +283,10 @@ class Graph extends PureComponent {
                 cy="50%"
                 labelLine={false}
                 label={renderCustomizedLabel}
-                outerRadius={80}
+                outerRadius={100}
+                fill="#8884d8"
               />
-              {data.map((index) => (
+              {data.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}

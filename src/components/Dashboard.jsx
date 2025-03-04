@@ -1,14 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
-import { FiShield, FiMonitor, FiLock, FiCode } from "react-icons/fi";
+import { FiShield, FiLock } from "react-icons/fi";
 import { FaMicrosoft } from "react-icons/fa";
+import { SiSonarqube } from "react-icons/si";
+import { VscAzureDevops } from "react-icons/vsc";
 
 const services = [
   {
     title: "Azure Cost Management",
     lastUpdated: "Last updated 2h ago",
-    icon: <FaMicrosoft />,
+    icon: <VscAzureDevops />,
     color: "text-blue-500",
     graphs: ["Monthly Spend", "Top 5 Services", "Cost by Subscription"],
   },
@@ -29,14 +31,13 @@ const services = [
   {
     title: "Azure Advisor",
     lastUpdated: "Today at 10:30 AM",
-    icon: <FiMonitor />,
+    icon: <FaMicrosoft />,
     color: "text-blue-500",
   },
   {
     title: "SonarQube",
-    status: "Active",
     lastUpdated: "Today at 10:30 AM",
-    icon: <FiCode />,
+    icon: <SiSonarqube />,
     color: "text-blue-500",
   },
   {
@@ -58,7 +59,6 @@ const Dashboard = () => {
     <div title="dashboard" className="space-y-6">
       {/* Summary Section */}
       <div className="bg-white rounded-lg shadow p-4 space-y-4">
-        <h3 className="text-xl font-bold">Summary</h3>
         <div className="grid grid-cols-1 gap-4">
           {services.map((service, index) => (
             <Card

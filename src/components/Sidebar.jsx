@@ -1,5 +1,5 @@
 import React from "react";
-import { FiBox, FiMonitor, FiShield } from "react-icons/fi";
+import { FiBox, FiMonitor, FiShield, FiCheckSquare } from "react-icons/fi";
 import { NavLink } from "react-router-dom";
 
 function Sidebar() {
@@ -31,6 +31,17 @@ function Sidebar() {
         >
           <FiShield className="text-blue-500" />
           <span>Security</span>
+        </NavLink>
+        <NavLink
+          to="/quality"
+          className={({ isActive }) =>
+            `w-full flex items-center space-x-3 p-2 rounded-lg ${
+              isActive ? "bg-gray-100" : "hover:bg-gray-100"
+            } transition-colors`
+          }
+        >
+          <FiCheckSquare className="text-blue-500" />
+          <span>Quality</span>
         </NavLink>
         <NavLink
           to="/monitoring"
