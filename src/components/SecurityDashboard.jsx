@@ -1,6 +1,7 @@
 import React from "react";
 import { FiLock, FiShield } from "react-icons/fi";
 import Card from "./Card";
+import { SiSonarqube } from "react-icons/si";
 import {
   LineChart,
   Line,

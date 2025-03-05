@@ -30,34 +30,6 @@ const COLORS = [
   "#FFCCBC",
 ];
 
-const RADIAN = Math.PI / 180;
-
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
-
 const budgetData = [
   { name: "Storage", value: 500 },
   { name: "Compute", value: 600 },
@@ -148,31 +120,6 @@ const vulnerabilitySLATrendData = [
 ];
 
 class Graph extends PureComponent {
-  renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    percent,
-  }) => {
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-    const x = cx + radius * Math.cos((-midAngle * Math.PI) / 180);
-    const y = cy + radius * Math.sin((-midAngle * Math.PI) / 180);
-
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="white"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {`${(percent * 100).toFixed(0)}%`}
-      </text>
-    );
-  };
-
   getGraphData = (title) => {
     switch (title) {
       case "Monthly Spend":
@@ -203,6 +150,33 @@ class Graph extends PureComponent {
       default:
         return null;
     }
+  };
+
+  renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index,
+  }) => {
+    const RADIAN = Math.PI / 180;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
   };
 
   render() {
@@ -269,8 +243,8 @@ class Graph extends PureComponent {
               <Legend />
               <Bar dataKey="0-30" stackId="a" fill="#0088FE" />
               <Bar dataKey="30-90" stackId="a" fill="#00C49F" />
-              <Bar dataKey="90-180" stackId="a" fill="#FFBB28" />
-              <Bar dataKey="180-220" stackId="a" fill="#FF8042" />
+              <Bar dataKey="90-180" stackId="a" fill="#F8BBD0" />
+              <Bar dataKey="180-220" stackId="a" fill="#F48FB1" />
             </BarChart>
           )}
           {type === "pie" && (
@@ -282,7 +256,7 @@ class Graph extends PureComponent {
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={renderCustomizedLabel}
+                label={this.renderCustomizedLabel}
                 outerRadius={100}
                 fill="#8884d8"
               />

@@ -1,0 +1,5 @@
+FROM deepseek-r1:32B
+PARAMETER num_thread 8
+PARAMETER temperature 2
+PARAMETER num_ctx 20480
+SYSTEM """You are an expert software engineer working on a project using React, Vite, TailwindCSS and JavaScript. You will give concise and well written code. """
