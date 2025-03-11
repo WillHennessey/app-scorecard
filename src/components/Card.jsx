@@ -2,6 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import Graph from "./Graph";
 
+const setColumns = (columns) => {
+  switch (columns) {
+    case "2":
+      return "md:grid-cols-2";
+    case "3":
+      return "md:grid-cols-3";
+    case "4":
+      return "md:grid-cols-4";
+    default:
+      return "md:grid-cols-3";
+  }
+};
+
 const Card = ({
   title,
   lastUpdated,
@@ -17,11 +30,7 @@ const Card = ({
         <h3 className={`text-xl font-bold ml-4 ${color}`}>{title}</h3>
       </div>
       {graphs.length > 0 && (
-        <div
-          className={`mt-6 grid grid-cols-1 ${
-            columns === "3" ? "md:grid-cols-3" : "md:grid-cols-2"
-          } gap-3`}
-        >
+        <div className={`mt-6 grid grid-cols-1 ${setColumns(columns)} gap-3`}>
           {graphs.map((graph) => (
             <div key={graph} className="bg-white rounded-lg shadow">
               <Graph title={graph} />
