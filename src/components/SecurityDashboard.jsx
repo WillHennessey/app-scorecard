@@ -19,11 +19,19 @@ const services = [
     icon: <FiLock />,
     color: "text-blue-500",
     graphs: ["Vulnerability SLA (per Department)", "Vulnerability SLA Trend"],
+    columns: "2",
   },
   {
     title: "SonarQube",
     lastUpdated: "Today at 10:30 AM",
     icon: <SiSonarqube />,
+    graphs: [
+      "Security Review New Code",
+      "Security Review Overall Code",
+      "Vulnerabilities New Code",
+      "Vulnerabilities Overall Code",
+    ],
+    columns: "2",
     color: "text-blue-500",
   },
   {
@@ -79,6 +87,7 @@ const SecurityDashboard = () => {
               icon={service.icon}
               color={service.color}
               graphs={service.graphs}
+              columns={service.columns}
             />
           ))}
         </div>

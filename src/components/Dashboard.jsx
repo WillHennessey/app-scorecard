@@ -59,7 +59,12 @@ const Dashboard = () => {
     <div title="dashboard" className="space-y-6">
       {/* Summary Section */}
       <div className="bg-white rounded-lg shadow p-4 space-y-4">
-        <div className="grid grid-cols-1 gap-4">
+        <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
+        <p className="text-gray-600">
+          This dashboard provides a summary of the current status of various
+          services.
+        </p>
+        <div className="grid grid-cols-1 gap-3">
           {services.map((service, index) => (
             <Card
               key={index}

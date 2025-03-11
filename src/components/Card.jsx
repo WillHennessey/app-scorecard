@@ -7,7 +7,8 @@ const Card = ({
   lastUpdated,
   icon,
   color = "#8884d8",
-  graphs = [], // Default empty array if not provided
+  graphs = [],
+  columns = "3",
 }) => {
   return (
     <div className="bg-f5f5f5 p-4 rounded-lg shadow">
@@ -16,7 +17,11 @@ const Card = ({
         <h3 className={`text-xl font-bold ml-4 ${color}`}>{title}</h3>
       </div>
       {graphs.length > 0 && (
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div
+          className={`mt-6 grid grid-cols-1 ${
+            columns === "3" ? "md:grid-cols-3" : "md:grid-cols-2"
+          } gap-3`}
+        >
           {graphs.map((graph) => (
             <div key={graph} className="bg-white rounded-lg shadow">
               <Graph title={graph} />
@@ -37,6 +42,7 @@ Card.propTypes = {
   icon: PropTypes.element.isRequired,
   color: PropTypes.string,
   graphs: PropTypes.arrayOf(PropTypes.string),
+  columns: PropTypes.string,
 };
 
 export default Card;

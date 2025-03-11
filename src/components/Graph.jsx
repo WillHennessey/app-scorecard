@@ -11,6 +11,7 @@ import {
   Bar,
   Pie,
   Cell,
+  Sector,
   ResponsiveContainer,
 } from "recharts";
 
@@ -100,6 +101,26 @@ const regulatoryComplianceBySubscriptionData = [
   { name: "Sub 4", value: 10 },
 ];
 
+const sonarNewSecurityReviewData = [
+  { name: "A", value: 900 },
+  { name: "E", value: 100 },
+];
+
+const sonarOverallSecurityReviewData = [
+  { name: "A", value: 800 },
+  { name: "E", value: 200 },
+];
+
+const sonarNewVulnerabilitiesData = [
+  { name: "A", value: 950 },
+  { name: "E", value: 50 },
+];
+
+const sonarOverallVulnerabilitiesData = [
+  { name: "A", value: 850 },
+  { name: "E", value: 150 },
+];
+
 const vulnerabilitySLAData = [
   { name: "Pharmacy", "0-30": 10, "30-90": 5, "90-180": 3, "180-220": 2 },
   {
@@ -120,6 +141,16 @@ const vulnerabilitySLATrendData = [
 ];
 
 class Graph extends PureComponent {
+  state = {
+    activeIndex: 0,
+  };
+
+  onPieEnter = (_, index) => {
+    this.setState({
+      activeIndex: index,
+    });
+  };
+
   getGraphData = (title) => {
     switch (title) {
       case "Monthly Spend":
@@ -147,6 +178,14 @@ class Graph extends PureComponent {
         return { data: vulnerabilitySLAData, type: "stackedBar" };
       case "Vulnerability SLA Trend":
         return { data: vulnerabilitySLATrendData, type: "stackedBar" };
+      case "Security Review New Code":
+        return { data: sonarNewSecurityReviewData, type: "responsivePie" };
+      case "Security Review Overall Code":
+        return { data: sonarOverallSecurityReviewData, type: "responsivePie" };
+      case "Vulnerabilities New Code":
+        return { data: sonarNewVulnerabilitiesData, type: "responsivePie" };
+      case "Vulnerabilities Overall Code":
+        return { data: sonarOverallVulnerabilitiesData, type: "responsivePie" };
       default:
         return null;
     }
@@ -176,6 +215,79 @@ class Graph extends PureComponent {
       >
         {`${(percent * 100).toFixed(0)}%`}
       </text>
+    );
+  };
+
+  renderActiveShape = (props) => {
+    const RADIAN = Math.PI / 180;
+    const {
+      cx,
+      cy,
+      midAngle,
+      innerRadius,
+      outerRadius,
+      startAngle,
+      endAngle,
+      fill,
+      payload,
+      percent,
+      value,
+    } = props;
+    const sin = Math.sin(-RADIAN * midAngle);
+    const cos = Math.cos(-RADIAN * midAngle);
+    const sx = cx + (outerRadius + 10) * cos;
+    const sy = cy + (outerRadius + 10) * sin;
+    const mx = cx + (outerRadius + 30) * cos;
+    const my = cy + (outerRadius + 30) * sin;
+    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+    const ey = my;
+    const textAnchor = cos >= 0 ? "start" : "end";
+
+    return (
+      <g>
+        <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
+          {payload.name}
+        </text>
+        <Sector
+          cx={cx}
+          cy={cy}
+          innerRadius={innerRadius}
+          outerRadius={outerRadius}
+          startAngle={startAngle}
+          endAngle={endAngle}
+          fill="#8884d8"
+        />
+        <Sector
+          cx={cx}
+          cy={cy}
+          startAngle={startAngle}
+          endAngle={endAngle}
+          innerRadius={outerRadius + 6}
+          outerRadius={outerRadius + 10}
+          fill="#8884d8"
+        />
+        <path
+          d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
+          stroke={fill}
+          fill="none"
+        />
+        <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+        <text
+          x={ex + (cos >= 0 ? 1 : -1) * 12}
+          y={ey}
+          textAnchor={textAnchor}
+          fill="#333"
+        >{`${value}`}</text>
+        <text
+          x={ex + (cos >= 0 ? 1 : -1) * 12}
+          y={ey}
+          dy={18}
+          textAnchor={textAnchor}
+          fill="#999"
+        >
+          {`(Rate ${(percent * 100).toFixed(2)}%)`}
+        </text>
+      </g>
     );
   };
 
@@ -268,6 +380,22 @@ class Graph extends PureComponent {
               ))}
               <Tooltip />
               <Legend />
+            </PieChart>
+          )}
+          {type == "responsivePie" && (
+            <PieChart>
+              <Pie
+                activeIndex={this.state.activeIndex}
+                activeShape={this.renderActiveShape}
+                data={data}
+                cx="50%"
+                cy="50%"
+                innerRadius={60}
+                outerRadius={80}
+                fill="#B7E4B5"
+                dataKey="value"
+                onMouseEnter={this.onPieEnter}
+              />
             </PieChart>
           )}
         </ResponsiveContainer>
