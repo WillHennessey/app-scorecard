@@ -17,18 +17,13 @@ function App() {
         <Sidebar />
         {/* Content Area */}
         <div className="flex-1 ml-36 p-4">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div className="flex flex-col space-y-6">
-                  <Dashboard />
-                </div>
-              }
-            />
-            <Route path="/security" element={<SecurityDashboard />} />
-            {/* Add more routes as needed */}
-          </Routes>
+          <div className="flex flex-col space-y-6">
+            {/* Routes */}
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/security" element={<SecurityDashboard />} />
+            </Routes>
+          </div>
         </div>
       </main>
     </div>

@@ -1,8 +1,20 @@
-# React + Vite
+# App-Scorecard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is built using Vite and React, it is currently a POC for a scorecard application. The goal is to create a simple and efficient way to track scores in various services and their core metrics.
 
-Currently, two official plugins are available:
+## Project Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+To setup and run this project locally run the following commands from the project root directory:
+
+```bash
+npm install
+npm run dev
+```
+
+## Testing
+
+This project uses Jest for it's unit testing, to run these unit tests run the following command:
+
+```bash
+npm run test
+```
