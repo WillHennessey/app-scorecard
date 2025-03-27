@@ -1,5 +1,18 @@
-import "@testing-library/jest-dom";
-import { TextEncoder, TextDecoder } from "util";
+import { expect, afterEach } from "vitest";
+import { cleanup } from "@testing-library/react";
+import * as matchers from "@testing-library/jest-dom/matchers";
 
-global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder;
+expect.extend(matchers);
+
+afterEach(() => {
+  cleanup();
+});
+
+// setupTests.js
+class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+global.ResizeObserver = ResizeObserver;
