@@ -32,9 +32,9 @@ const Card = ({
       {graphs.length > 0 && (
         <div className={`mt-6 grid grid-cols-1 ${setColumns(columns)} gap-3`}>
           {graphs.map((graph) => (
-            <div key={graph} className="bg-white rounded-lg shadow">
+            <figure key={graph} className="bg-white rounded-lg shadow">
               <Graph title={graph} />
-            </div>
+            </figure>
           ))}
         </div>
       )}
