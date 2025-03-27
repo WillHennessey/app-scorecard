@@ -1,24 +1,25 @@
-// src/__tests__/App.test.jsx
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import App from "../App";
 
 describe("App Component", () => {
-  beforeEach(() => {
+  test("renders the Header and Sidebar", () => {
     render(
       <MemoryRouter>
         <App />
       </MemoryRouter>
     );
-  });
-
-  test("renders the Header and Sidebar", () => {
     expect(screen.getByTitle("header")).toBeInTheDocument();
     expect(screen.getByTitle("sidebar")).toBeInTheDocument();
   });
 
   test("renders Dashboard on default route", () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
     expect(screen.getByText(/RxI Dashboard/i)).toBeInTheDocument();
   });
 
@@ -32,6 +33,11 @@ describe("App Component", () => {
   });
 
   test("should not render Security Dashboard on default route", () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
     expect(screen.queryByText(/Security Dashboard/i)).not.toBeInTheDocument();
   });
 
@@ -41,6 +47,6 @@ describe("App Component", () => {
         <App />
       </MemoryRouter>
     );
-    expect(screen.queryByText(/Services Overview/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/RxI Dashboard/i)).not.toBeInTheDocument();
   });
 });
