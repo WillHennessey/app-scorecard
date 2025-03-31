@@ -34,22 +34,20 @@ import {
   top5CostRecommendationsData,
   top5ReliabilityRecommendationsData,
   top5OperationalExcellenceRecommendationsData,
+  releasabilityData,
+  reliabilityData,
+  maintainabilityData,
+  securityReviewData,
+  securityVulnerabilitiesData,
 } from "../sampleData";
 
 const COLORS = [
-  "#0088FE",
-  "#00C49F",
-  "#FFBB28",
-  "#FF8042",
-  "#AA00FF",
-  "#FF4081",
-  "#00E5FF",
-  "#8884d8",
-  "#A3C1DA",
-  "#D5B2E0",
-  "#B7E4B5",
-  "#F8BBD0",
-  "#FFCCBC",
+  "#6BAED6", // Soft Blue
+  "#74C476", // Soft Green
+  "#FF9999", // Soft Orange
+  "#FDAE6B", // Soft Peach
+  "#9E9AC8", // Soft Purple
+  // "#BCBDDC", // Light Lavender
 ];
 
 class Graph extends PureComponent {
@@ -110,6 +108,16 @@ class Graph extends PureComponent {
           data: top5OperationalExcellenceRecommendationsData,
           type: "horizontalBar",
         };
+      case "Releasability":
+        return { data: releasabilityData, type: "responsivePie" };
+      case "Reliability":
+        return { data: reliabilityData, type: "responsivePie" };
+      case "Maintainability":
+        return { data: maintainabilityData, type: "responsivePie" };
+      case "Security Review":
+        return { data: securityReviewData, type: "responsivePie" };
+      case "Security Vulnerabilities":
+        return { data: securityVulnerabilitiesData, type: "responsivePie" };
       default:
         return null;
     }
@@ -244,7 +252,7 @@ class Graph extends PureComponent {
               <YAxis dataKey="service" type="category" />
               <Tooltip />
               <Legend />
-              <Bar dataKey="usage" fill="#00C49F" />
+              <Bar dataKey="usage" fill="#B2DF8A" />
             </BarChart>
           )}
           {type === "bar" && (
@@ -294,14 +302,14 @@ class Graph extends PureComponent {
                 labelLine={false}
                 label={this.renderCustomizedLabel}
                 outerRadius={100}
-                fill="#8884d8"
-              />
-              {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
+              >
+                {data.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
               <Tooltip />
               <Legend />
             </PieChart>
@@ -316,10 +324,16 @@ class Graph extends PureComponent {
                 cy="50%"
                 innerRadius={60}
                 outerRadius={80}
-                fill="#B7E4B5"
                 dataKey="value"
                 onMouseEnter={this.onPieEnter}
-              />
+              >
+                {data.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
             </PieChart>
           )}
         </ResponsiveContainer>

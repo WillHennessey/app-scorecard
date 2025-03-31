@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Card from "./Card";
 import { FiShield, FiLock } from "react-icons/fi";
 import { FaMicrosoft } from "react-icons/fa";
@@ -44,6 +43,14 @@ const services = [
     lastUpdated: "Today at 10:30 AM",
     icon: <SiSonarqube />,
     color: "text-blue-500",
+    graphs: [
+      "Releasability",
+      "Reliability",
+      "Maintainability",
+      "Security Review",
+      "Security Vulnerabilities",
+    ],
+    columns: "2",
   },
   {
     title: "Rapid7",
@@ -80,24 +87,13 @@ const Dashboard = () => {
               icon={service.icon}
               color={service.color}
               graphs={service.graphs}
+              columns={service.columns}
             />
           ))}
         </div>
       </div>
     </div>
   );
-};
-
-Dashboard.propTypes = {
-  services: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      lastUpdated: PropTypes.string.isRequired,
-      icon: PropTypes.element.isRequired,
-      color: PropTypes.string.isRequired,
-      graphs: PropTypes.arrayOf(PropTypes.string),
-    })
-  ),
 };
 
 export default Dashboard;

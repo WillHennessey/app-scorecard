@@ -130,3 +130,32 @@ export const top5OperationalExcellenceRecommendationsData = [
   { name: "D", count: 7 },
   { name: "E", count: 4 },
 ];
+
+export const releasabilityData = [
+  { name: "Pass", value: 70 },
+  { name: "Fail", value: 30 },
+];
+
+export const reliabilityData = [
+  { name: "High", value: 60 },
+  { name: "Medium", value: 30 },
+  { name: "Low", value: 10 },
+];
+
+export const maintainabilityData = [
+  { name: "Good", value: 50 },
+  { name: "Average", value: 30 },
+  { name: "Poor", value: 20 },
+];
+
+export const securityReviewData = [
+  { name: "Reviewed", value: 80 },
+  { name: "Pending", value: 20 },
+];
+
+export const securityVulnerabilitiesData = [
+  { name: "Critical", value: 10 },
+  { name: "High", value: 20 },
+  { name: "Medium", value: 30 },
+  { name: "Low", value: 40 },
+];
