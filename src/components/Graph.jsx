@@ -31,6 +31,9 @@ import {
   sonarOverallVulnerabilitiesData,
   vulnerabilitySLAData,
   vulnerabilitySLATrendData,
+  top5CostRecommendationsData,
+  top5ReliabilityRecommendationsData,
+  top5OperationalExcellenceRecommendationsData,
 } from "../sampleData";
 
 const COLORS = [
@@ -95,6 +98,18 @@ class Graph extends PureComponent {
         return { data: sonarNewVulnerabilitiesData, type: "responsivePie" };
       case "Vulnerabilities Overall Code":
         return { data: sonarOverallVulnerabilitiesData, type: "responsivePie" };
+      case "Top 5 Cost Recommendations":
+        return { data: top5CostRecommendationsData, type: "horizontalBar" };
+      case "Top 5 Reliability Recommendations":
+        return {
+          data: top5ReliabilityRecommendationsData,
+          type: "horizontalBar",
+        };
+      case "Top 5 Operational Excellence Recommendations":
+        return {
+          data: top5OperationalExcellenceRecommendationsData,
+          type: "horizontalBar",
+        };
       default:
         return null;
     }

@@ -39,6 +39,14 @@ const services = [
     lastUpdated: "Today at 10:30 AM",
     icon: <FiShield />,
     color: "text-blue-500",
+    graphs: [
+      "Security Alerts by Resource Type",
+      "Top 5 Security Alerts",
+      "Security Alerts by Subscription",
+      "Top 5 Azure Policy Violations",
+      "Top 5 Regulatory Compliance Alerts",
+      "Regulatory Compliance by Subscription",
+    ],
   },
   {
     title: "Contrast Security",

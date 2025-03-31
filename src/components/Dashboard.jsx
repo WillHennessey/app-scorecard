@@ -33,6 +33,11 @@ const services = [
     lastUpdated: "Today at 10:30 AM",
     icon: <FaMicrosoft />,
     color: "text-blue-500",
+    graphs: [
+      "Top 5 Reliability Recommendations",
+      "Top 5 Cost Recommendations",
+      "Top 5 Operational Excellence Recommendations",
+    ],
   },
   {
     title: "SonarQube",
@@ -45,6 +50,8 @@ const services = [
     lastUpdated: "Today at 10:30 AM",
     icon: <FiLock />,
     color: "text-blue-500",
+    graphs: ["Vulnerability SLA (per Department)", "Vulnerability SLA Trend"],
+    columns: "2",
   },
   {
     title: "Contrast Security",

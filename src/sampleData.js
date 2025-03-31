@@ -106,3 +106,27 @@ export const vulnerabilitySLATrendData = [
   { name: "Mar", "0-30": 7, "30-90": 1, "90-180": 2 },
   { name: "Apr", "0-30": 8, "30-90": 4, "90-180": 1 },
 ];
+
+export const top5CostRecommendationsData = [
+  { name: "A", count: 17 },
+  { name: "B", count: 14 },
+  { name: "C", count: 12 },
+  { name: "D", count: 8 },
+  { name: "E", count: 6 },
+];
+
+export const top5ReliabilityRecommendationsData = [
+  { name: "A", count: 16 },
+  { name: "B", count: 13 },
+  { name: "C", count: 11 },
+  { name: "D", count: 9 },
+  { name: "E", count: 5 },
+];
+
+export const top5OperationalExcellenceRecommendationsData = [
+  { name: "A", count: 18 },
+  { name: "B", count: 15 },
+  { name: "C", count: 10 },
+  { name: "D", count: 7 },
+  { name: "E", count: 4 },
+];
