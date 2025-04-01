@@ -39,15 +39,14 @@ import {
   maintainabilityData,
   securityReviewData,
   securityVulnerabilitiesData,
-} from "../sampleData";
+} from "../data/sampleData";
 
 const COLORS = [
-  "#6BAED6", // Soft Blue
-  "#74C476", // Soft Green
-  "#FF9999", // Soft Orange
-  "#FDAE6B", // Soft Peach
-  "#9E9AC8", // Soft Purple
-  // "#BCBDDC", // Light Lavender
+  "#FF6B6B", // Soft Red
+  "#6BCB77", // Soft Green
+  "#4D96FF", // Soft Blue
+  "#9D4EDD", // Soft Purple
+  "#F39ACF", // Soft Pink
 ];
 
 class Graph extends PureComponent {
@@ -187,7 +186,7 @@ class Graph extends PureComponent {
           outerRadius={outerRadius}
           startAngle={startAngle}
           endAngle={endAngle}
-          fill="#8884d8"
+          fill="#9D4EDD"
         />
         <Sector
           cx={cx}
@@ -196,7 +195,7 @@ class Graph extends PureComponent {
           endAngle={endAngle}
           innerRadius={outerRadius + 6}
           outerRadius={outerRadius + 10}
-          fill="#8884d8"
+          fill="#9D4EDD"
         />
         <path
           d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
@@ -242,7 +241,7 @@ class Graph extends PureComponent {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="amount" fill="#0088FE" />
+              <Bar dataKey="amount" fill="#4D96FF" />
             </BarChart>
           )}
           {type === "topServices" && (
@@ -252,7 +251,7 @@ class Graph extends PureComponent {
               <YAxis dataKey="service" type="category" />
               <Tooltip />
               <Legend />
-              <Bar dataKey="usage" fill="#B2DF8A" />
+              <Bar dataKey="usage" fill="#F39ACF" />
             </BarChart>
           )}
           {type === "bar" && (
@@ -262,7 +261,7 @@ class Graph extends PureComponent {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="alerts" fill="#F8BBD0" />
+              <Bar dataKey="alerts" fill="#F39ACF" />
             </BarChart>
           )}
           {type === "horizontalBar" && (
@@ -275,7 +274,7 @@ class Graph extends PureComponent {
               />
               <Tooltip />
               <Legend />
-              <Bar dataKey="count" fill="#00C49F" />
+              <Bar dataKey="count" fill="#6BCB77" />
             </BarChart>
           )}
           {type === "stackedBar" && (
@@ -285,10 +284,10 @@ class Graph extends PureComponent {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="0-30" stackId="a" fill="#0088FE" />
-              <Bar dataKey="30-90" stackId="a" fill="#00C49F" />
-              <Bar dataKey="90-180" stackId="a" fill="#F8BBD0" />
-              <Bar dataKey="180-220" stackId="a" fill="#F48FB1" />
+              <Bar dataKey="0-30" stackId="a" fill="#4D96FF" />
+              <Bar dataKey="30-90" stackId="a" fill="#6BCB77" />
+              <Bar dataKey="90-180" stackId="a" fill="#F39ACF" />
+              <Bar dataKey="180-220" stackId="a" fill="#9D4EDD" />
             </BarChart>
           )}
           {type === "pie" && (

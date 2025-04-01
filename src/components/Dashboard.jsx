@@ -60,12 +60,12 @@ const services = [
     graphs: ["Vulnerability SLA (per Department)", "Vulnerability SLA Trend"],
     columns: "2",
   },
-  {
-    title: "Contrast Security",
-    lastUpdated: "Today at 10:30 AM",
-    icon: <FiShield />,
-    color: "text-blue-500",
-  },
+  // {
+  //   title: "Contrast Security",
+  //   lastUpdated: "Today at 10:30 AM",
+  //   icon: <FiShield />,
+  //   color: "text-blue-500",
+  // },
 ];
 
 const Dashboard = () => {

@@ -11,6 +11,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { lineChartData } from "../data/sampleData";
 
 const services = [
   {
@@ -48,21 +49,12 @@ const services = [
       "Regulatory Compliance by Subscription",
     ],
   },
-  {
-    title: "Contrast Security",
-    lastUpdated: "Today at 10:30 AM",
-    icon: <FiShield />,
-    color: "text-blue-500",
-  },
-];
-
-const lineChartData = [
-  { name: "Jan", vulnerabilities: 400, secrets: 240 },
-  { name: "Feb", vulnerabilities: 300, secrets: 130 },
-  { name: "Mar", vulnerabilities: 500, secrets: 290 },
-  { name: "Apr", vulnerabilities: 400, secrets: 500 },
-  { name: "May", vulnerabilities: 600, secrets: 350 },
-  { name: "Jun", vulnerabilities: 700, secrets: 400 },
+  // {
+  //   title: "Contrast Security",
+  //   lastUpdated: "Today at 10:30 AM",
+  //   icon: <FiShield />,
+  //   color: "text-blue-500",
+  // },
 ];
 
 const SecurityDashboard = () => {
@@ -77,8 +69,8 @@ const SecurityDashboard = () => {
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
-            <Line type="monotone" dataKey="vulnerabilities" stroke="#0088FE" />
-            <Line type="monotone" dataKey="secrets" stroke="#00C49F" />
+            <Line type="monotone" dataKey="vulnerabilities" stroke="#4D96FF" />
+            <Line type="monotone" dataKey="secrets" stroke="#6BCB77" />
           </LineChart>
         </ResponsiveContainer>
       </div>

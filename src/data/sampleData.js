@@ -159,3 +159,12 @@ export const securityVulnerabilitiesData = [
   { name: "Medium", value: 30 },
   { name: "Low", value: 40 },
 ];
+
+export const lineChartData = [
+  { name: "Jan", vulnerabilities: 400, secrets: 240 },
+  { name: "Feb", vulnerabilities: 300, secrets: 130 },
+  { name: "Mar", vulnerabilities: 500, secrets: 290 },
+  { name: "Apr", vulnerabilities: 400, secrets: 500 },
+  { name: "May", vulnerabilities: 600, secrets: 350 },
+  { name: "Jun", vulnerabilities: 700, secrets: 400 },
+];
