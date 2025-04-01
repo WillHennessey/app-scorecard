@@ -69,17 +69,30 @@ class Graph extends PureComponent {
       case "Cost by Subscription":
         return { data: budgetData, type: "pie" };
       case "Security Alerts by Resource Type":
-        return { data: securityAlertsByResourceData, type: "bar" };
+        return {
+          data: securityAlertsByResourceData,
+          type: "bar",
+          color: "#6BCB77",
+        };
       case "Top 5 Security Alerts":
-        return { data: top5SecurityAlertsData, type: "horizontalBar" };
+        return {
+          data: top5SecurityAlertsData,
+          type: "horizontalBar",
+          color: "#9D4EDD",
+        };
       case "Security Alerts by Subscription":
         return { data: securityAlertsBySubscriptionData, type: "pie" };
       case "Top 5 Azure Policy Violations":
-        return { data: top5PolicyViolationsData, type: "horizontalBar" };
+        return {
+          data: top5PolicyViolationsData,
+          type: "horizontalBar",
+          color: "#FF6B6B",
+        };
       case "Top 5 Regulatory Compliance Alerts":
         return {
           data: top5RegulatoryComplianceAlertsData,
           type: "horizontalBar",
+          color: "#6BCB77",
         };
       case "Regulatory Compliance by Subscription":
         return { data: regulatoryComplianceBySubscriptionData, type: "pie" };
@@ -96,16 +109,22 @@ class Graph extends PureComponent {
       case "Vulnerabilities Overall Code":
         return { data: sonarOverallVulnerabilitiesData, type: "responsivePie" };
       case "Top 5 Cost Recommendations":
-        return { data: top5CostRecommendationsData, type: "horizontalBar" };
+        return {
+          data: top5CostRecommendationsData,
+          type: "horizontalBar",
+          color: "#4D96FF",
+        };
       case "Top 5 Reliability Recommendations":
         return {
           data: top5ReliabilityRecommendationsData,
           type: "horizontalBar",
+          color: "#6BCB77",
         };
       case "Top 5 Operational Excellence Recommendations":
         return {
           data: top5OperationalExcellenceRecommendationsData,
           type: "horizontalBar",
+          color: "#F39ACF",
         };
       case "Releasability":
         return { data: releasabilityData, type: "responsivePie" };
@@ -225,6 +244,7 @@ class Graph extends PureComponent {
   render() {
     const { title } = this.props;
     const graphInfo = this.getGraphData(title);
+    const color = graphInfo?.color; // Extract color if provided in graphInfo
 
     if (!graphInfo) return null;
 
@@ -261,7 +281,7 @@ class Graph extends PureComponent {
               <YAxis />
               <Tooltip />
               <Legend />
-              <Bar dataKey="alerts" fill="#F39ACF" />
+              <Bar dataKey="alerts" fill={color ? color : "#F39ACF"} />
             </BarChart>
           )}
           {type === "horizontalBar" && (
@@ -274,7 +294,7 @@ class Graph extends PureComponent {
               />
               <Tooltip />
               <Legend />
-              <Bar dataKey="count" fill="#6BCB77" />
+              <Bar dataKey="count" fill={color ? color : "#6BCB77"} />
             </BarChart>
           )}
           {type === "stackedBar" && (
