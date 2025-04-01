@@ -168,3 +168,48 @@ export const lineChartData = [
   { name: "May", vulnerabilities: 600, secrets: 350 },
   { name: "Jun", vulnerabilities: 700, secrets: 400 },
 ];
+
+export const qualityLineData = [
+  {
+    name: "Jan",
+    bugs: 4000,
+    smells: 2400,
+    amt: 2400,
+  },
+  {
+    name: "Feb",
+    bugs: 3000,
+    smells: 1398,
+    amt: 2210,
+  },
+  {
+    name: "March",
+    bugs: 2000,
+    smells: 9800,
+    amt: 2290,
+  },
+  {
+    name: "April",
+    bugs: 2780,
+    smells: 3908,
+    amt: 2000,
+  },
+  {
+    name: "May",
+    bugs: 1890,
+    smells: 4800,
+    amt: 2181,
+  },
+  {
+    name: "June",
+    bugs: 2390,
+    smells: 3800,
+    amt: 2500,
+  },
+  {
+    name: "July",
+    bugs: 3490,
+    smells: 4300,
+    amt: 2100,
+  },
+];

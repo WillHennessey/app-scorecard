@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import SecurityDashboard from "./components/SecurityDashboard";
+import QualityDashboard from "./components/QualityDashboard";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import "./App.css";
@@ -22,6 +23,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/security" element={<SecurityDashboard />} />
+              <Route path="/quality" element={<QualityDashboard />} />
             </Routes>
           </div>
         </div>

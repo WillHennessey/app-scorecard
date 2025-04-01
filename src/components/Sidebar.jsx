@@ -12,6 +12,7 @@ function Sidebar() {
         <h2 className="text-xl font-bold mb-4">Menu</h2>
         <NavLink
           to="/"
+          end
           className={({ isActive }) =>
             `w-full flex items-center space-x-3 p-2 rounded-lg ${
               isActive ? "bg-gray-100" : "hover:bg-gray-100"
@@ -23,6 +24,7 @@ function Sidebar() {
         </NavLink>
         <NavLink
           to="/security"
+          end
           className={({ isActive }) =>
             `w-full flex items-center space-x-3 p-2 rounded-lg ${
               isActive ? "bg-gray-100" : "hover:bg-gray-100"
@@ -34,6 +36,7 @@ function Sidebar() {
         </NavLink>
         <NavLink
           to="/quality"
+          end
           className={({ isActive }) =>
             `w-full flex items-center space-x-3 p-2 rounded-lg ${
               isActive ? "bg-gray-100" : "hover:bg-gray-100"
@@ -45,6 +48,7 @@ function Sidebar() {
         </NavLink>
         <NavLink
           to="/monitoring"
+          end
           className={({ isActive }) =>
             `w-full flex items-center space-x-3 p-2 rounded-lg ${
               isActive ? "bg-gray-100" : "hover:bg-gray-100"
